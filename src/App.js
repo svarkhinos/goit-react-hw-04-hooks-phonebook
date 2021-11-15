@@ -15,20 +15,19 @@ const App = () => {
   const [filter, setFilter] = useState('');
 
   const formSubmitHandler = (name, number) => {
-    if (contacts) {
-      const nameExist = contacts.find(contact => contact.name === name);
+    const nameExist = contacts.find(contact => contact.name === name);
 
-      if (nameExist !== undefined) {
-        alert(`${name}is already in contacts`);
-      }
+    if (nameExist !== undefined) {
+      alert(`${name}is already in contacts`);
+    } else {
+      const newContact = {
+        id: shortid.generate(),
+        name,
+        number,
+      };
+
+      setContacts(prevState => [newContact, ...prevState]);
     }
-    const newContact = {
-      id: shortid.generate(),
-      name,
-      number,
-    };
-
-    setContacts(prevState => [newContact, ...prevState]);
   };
 
   const changeFilter = event => {
